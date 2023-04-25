@@ -40,50 +40,41 @@
   </head>
   <body>
     <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+      <h2 id = "word">Lets play HangBot</h2>
+      
+      
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+      // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+      // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+      // import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
+      // import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
+      import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-functions.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+      
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyA5Xoy031BKSPUcTWzgiw721LprZetYiso",
+        authDomain: "sesl3-d8975.firebaseapp.com",
+        databaseURL: "https://sesl3-d8975-default-rtdb.firebaseio.com",
+        projectId: "sesl3-d8975",
+        storageBucket: "sesl3-d8975.appspot.com",
+        messagingSenderId: "908221585980",
+        appId: "1:908221585980:web:8b90754eebd4485ae3c139",
+        measurementId: "G-ENM8KEH2CC"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const functions = getFunctions();
+      // const auth = getAuth(app);
+      // const db = getFirestore(app);
+      const word = httpsCallable(functions, 'words');
+      word().then((result) => {
+        console.log(result);
+      })
     </script>
+    <script src = "index.js"></script>
   </body>
 </html>
