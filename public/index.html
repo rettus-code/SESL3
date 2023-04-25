@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+    <title>HangBot</title>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.20.0/firebase-app-compat.js"></script>
@@ -24,32 +24,78 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      body { 
+        background: #ECEFF1; 
+        color: rgba(0,0,0,0.87); 
+        font-family: Roboto, Helvetica, Arial, sans-serif; 
+        margin: 0; 
+        padding: 0; 
+      }
+      #playChoice { 
+        background: white; 
+        max-width: 360px; 
+        margin: 100px auto 16px; 
+        padding: 32px 24px; 
+        border-radius: 3px; 
+      }
+      #playChoice h2 { 
+        color: #ffa100; 
+        font-weight: bold; 
+        font-size: 16px; 
+        margin: 0 0 8px; 
+      }
+      #playChoice { 
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+      }
+      #playField {
+        position: absolute;
+        left: 40vw;
+      }
+      #challenge {
+        font-size: 22px;
+      }
+      #challenge p {
+        position: relative;
+        font-size: 24px;
+        margin-left: 12px;
+      }
+      #letter {
+        width:25px;
+      }
       @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
+        body, #playChoice { 
+          margin-top: 0; 
+          background: white; 
+          box-shadow: none; 
+        }
+        body { 
+          border-top: 16px solid #ffa100; 
+        }
       }
     </style>
   </head>
   <body>
-    <div id="message">
+    <div id="playChoice">
       <h2 id = "word">Lets play HangBot</h2>
-      
-      
+      <button type = "click" id = "pcPlay">Play vs PC</button>
+      <button type = "click" id = "userPlay" >Accept player challenge</button>
+    </div>
+    <div id = "playField">
+      <h6 id = "challenge"></h6>
+      <form id = "guessForm" style = "display:none">
+        <label for = "letter">Guess a letter</label>
+        <input type = "text" name = "letter" id = "letter">
+        <button type = "submit" id = "letterButton">Submit your guess</button>
+      </form>
+    </div>
+    
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
       // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
       // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
       // import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
       // import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
-      import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-functions.js";
+      
       // TODO: Add SDKs for Firebase products that you want to use
       // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -67,14 +113,9 @@
       };
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
-      const functions = getFunctions();
-      // const auth = getAuth(app);
-      // const db = getFirestore(app);
-      const word = httpsCallable(functions, 'words');
-      word().then((result) => {
-        console.log(result);
-      })
+      import { pcPlay } from "/scripts/index.js"
+      document.getElementById("pcPlay").addEventListener("click", pcPlay);
     </script>
-    <script src = "index.js"></script>
+    <script type = "module" src = "scripts/index.js"></script>
   </body>
 </html>
