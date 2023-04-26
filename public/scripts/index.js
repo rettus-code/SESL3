@@ -19,6 +19,8 @@ const functions = getFunctions();
 // const db = getFirestore(app);
 const word = httpsCallable(functions, 'words');
 let curWord = [];
+
+import { update } from "./auth.js";
 export function pcPlay(){
   word().then((result) => {
     curWord = result.data.split("");
@@ -98,6 +100,7 @@ function validation(char){
 function botUpdate(){
   console.log(wrongCount);
   if(wrongCount > 5){
+    update("l");
     document.getElementById("guessForm").style.display = "none";
     document.getElementById("lost").style.display = "block";
     document.getElementById("resultField").style.display = "none"
@@ -130,6 +133,7 @@ function charMatch(char){
   return match;
 }
 function win(){
+  update("w");
   document.getElementById("guessForm").style.display = "none";
   document.getElementById("lost").innerText = "You Won!!"
   document.getElementById("lost").style.display = "block";

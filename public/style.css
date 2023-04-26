@@ -5,12 +5,28 @@ body {
     margin: 0; 
     padding: 0; 
   }
+  #hero, #logging {
+    width: 460px;text-align: center;
+    position: absolute;
+    left: calc(50vw - 230px);
+  }
+  #hero {
+    top: 0px;
+  }
+  #logging {
+    top: 150px;
+  }
+
   #playChoice { 
+    position: absolute;
+    top: 150px;
+    left: calc(50vw - 180px);
     background: #ffffff; 
-    max-width: 360px; 
+    width: 360px; 
     margin: 100px auto 16px; 
     padding: 32px 24px; 
     border-radius: 3px; 
+    z-index: 5;
   }
   #playChoice h2 { 
     color: #ffa100; 
@@ -23,13 +39,15 @@ body {
   }
   #playField, #lost {
     position: absolute;
-    top: 20vh;
-    left: 40vw;
+    top: 360px;
+    width:400px;
+    left: calc(50vw - 200px);
   }
   #resultField {
     position: absolute;
-    top: 35vh;
-    left: 40vw;
+    top: 520px;
+    width:400px;
+    left: calc(50vw - 200px);
   }
   #challenge, #guessedLetters {
     font-size: 22px;
