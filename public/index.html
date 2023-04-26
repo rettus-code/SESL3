@@ -1,77 +1,112 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HangBot</title>
-    <link rel= "stylesheet" href= "style.css">
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/9.20.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.20.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.20.0/firebase-performance-compat.js"></script>
-    <!-- 
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HangBot</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/9.20.0/firebase-app-compat.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/9.20.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-database-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-functions-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-messaging-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-analytics-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-remote-config-compat.js"></script>
+  <script defer src="/__/firebase/9.20.0/firebase-performance-compat.js"></script>
+  <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
     -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-  </head>
-  <body>
-    <div id="playChoice">
-      <h2 id = "word">Lets play HangBot</h2>
-      <button type = "click" id = "pcPlay">Play vs PC</button>
-      <button type = "click" id = "userPlay" >Accept player challenge</button>
-    </div>
-    <div id = "playField">
-      <h6 id = "challenge"></h6>
-      <form id = "guessForm" style = "display:none">
-        <label for = "letter">Guess a letter</label>
-        <input type = "text" name = "letter" id = "letter" autocomplete="off">
-        <button type = "submit" id = "letterButton">Submit your guess</button>
-      </form>
-    </div>
-    <h1 id = "lost" style="display:none">You Lost</h1>
-    <div id = "resultField" style = "display:none">
-      <h6 id = "guessedLetters" >Letters you've guessed</h6>
-    </div>
-      
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-      // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
-      // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
-      // import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
-      // import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
-      
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-      
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: "AIzaSyA5Xoy031BKSPUcTWzgiw721LprZetYiso",
-        authDomain: "sesl3-d8975.firebaseapp.com",
-        databaseURL: "https://sesl3-d8975-default-rtdb.firebaseio.com",
-        projectId: "sesl3-d8975",
-        storageBucket: "sesl3-d8975.appspot.com",
-        messagingSenderId: "908221585980",
-        appId: "1:908221585980:web:8b90754eebd4485ae3c139",
-        measurementId: "G-ENM8KEH2CC"
-      };
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      import { pcPlay } from "/scripts/index.js"
-      import { guessForm } from "/scripts/index.js"
-      document.getElementById("pcPlay").addEventListener("click", pcPlay);
-      document.getElementById("guessForm").addEventListener("submit", guessForm);
-    </script>
-    <script type = "module" src = "scripts/index.js"></script>
-  </body>
+</head>
+<nav>
+  <ul id="navbar">
+    <li id="login"><a href="javascript:login()">Login</a></li>
+    <li id="logout" style="display: none;"><a href="javascript:logout()">Logout</a></li>
+    <li id="signUp"><a href="javascript:signUp()">Sign Up</a></li>
+  </ul>
+</nav>
+<h2 id="user"></h2>
+<div class="flex-shrink-0 signUpModal" id="signUpM" style="display: none;">
+  <div class="container">
+    <form id="emailForm">
+      <label for="userName" class="form-label">Your Name</label><br>
+      <input type="text" id="userName" name="userName" placeholder="Your Name"><br>
+      <label for="email" class="form-label">Email</label><br>
+      <input type="text" id="email" name="email" placeholder="email"><br>
+      <label for="password" class="form-label">Password</label><br>
+      <input type="password" id="password" name="password" placeholder="Password"><br>
+      <button type="submit" value="subscribe" id="sub">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="flex-shrink-0 signUpModal" id="loginModal" style="display: none;">
+  <div class="container">
+    <form id="loginForm">
+      <label for="email" class="form-label">Email</label><br>
+      <input type="text" id="lEmail" name="lEmail" placeholder="email"><br>
+      <label for="password" class="form-label">Password</label><br>
+      <input type="password" id="lPassword" name="password" placeholder="Password"><br>
+      <button type="submit" id="log">Submit</button>
+    </form>
+  </div>
+</div>
+
+<body>
+  <div id="playChoice">
+    <h2 id="word">Lets play HangBot</h2>
+    <button type="click" id="pcPlay">Play vs PC</button>
+    <button type="click" id="userPlay">Accept player challenge</button>
+  </div>
+  <div id="playField">
+    <h6 id="challenge"></h6>
+    <form id="guessForm" style="display:none">
+      <label for="letter">Guess a letter</label>
+      <input type="text" name="letter" id="letter" autocomplete="off">
+      <button type="submit" id="letterButton">Submit your guess</button>
+    </form>
+  </div>
+  <h1 id="lost" style="display:none">You Lost</h1>
+  <div id="resultField" style="display:none">
+    <h6 id="guessedLetters">Letters you've guessed</h6>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+    // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+    // import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
+    // import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5Xoy031BKSPUcTWzgiw721LprZetYiso",
+      authDomain: "sesl3-d8975.firebaseapp.com",
+      databaseURL: "https://sesl3-d8975-default-rtdb.firebaseio.com",
+      projectId: "sesl3-d8975",
+      storageBucket: "sesl3-d8975.appspot.com",
+      messagingSenderId: "908221585980",
+      appId: "1:908221585980:web:8b90754eebd4485ae3c139",
+      measurementId: "G-ENM8KEH2CC"
+    };
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    import { pcPlay } from "/scripts/index.js"
+    import { guessForm } from "/scripts/index.js"
+    document.getElementById("pcPlay").addEventListener("click", pcPlay);
+    document.getElementById("guessForm").addEventListener("submit", guessForm);
+  </script>
+  <script type="module" src="scripts/index.js"></script>
+</body>
+
 </html>

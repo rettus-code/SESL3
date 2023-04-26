@@ -1,54 +1,157 @@
-body { 
-    background: #ECEFF1; 
-    color: rgba(0,0,0,0.87); 
-    font-family: Roboto, Helvetica, Arial, sans-serif; 
-    margin: 0; 
-    padding: 0; 
+body {
+  background: #ECEFF1;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#playChoice {
+  background: #ffffff;
+  max-width: 360px;
+  margin: 100px auto 16px;
+  padding: 32px 24px;
+  border-radius: 3px;
+}
+
+#playChoice h2 {
+  color: #ffa100;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+#playChoice {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#playField,
+#lost {
+  position: absolute;
+  top: 20vh;
+  left: 40vw;
+}
+
+#resultField {
+  position: absolute;
+  top: 35vh;
+  left: 40vw;
+}
+
+#challenge,
+#guessedLetters {
+  font-size: 22px;
+}
+
+#challenge p,
+#guessedLetters p {
+  position: relative;
+  font-size: 24px;
+  margin-left: 12px;
+}
+
+#letter {
+  width: 25px;
+}
+
+#letterButton {
+  color: #09C9C2;
+  font-size: 16px;
+  margin-left: 12px;
+}
+
+#form,
+#form button,
+#navbar,
+#updateForm,
+.signUpModal {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#form,
+#updateForm,
+.signUpModal {
+  background: #ffffff;
+  max-width: 360px;
+  margin: 100px auto 16px;
+  padding: 32px 24px;
+  border-radius: 3px;
+}
+
+#updateForm {
+  z-index: 10;
+  position: absolute;
+  top: 6%;
+  width: 360px;
+}
+
+#form label,
+#updateForm label,
+.signUpModal label {
+  color: #ffa100;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+#form input,
+#updateForm input,
+.signUpModal input {
+  margin: 0 0 8px;
+  width: 90%;
+}
+
+#form button,
+#updateForm button,
+.signUpModal button {
+  display: block;
+  text-align: center;
+  background: #03e574;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+#navbar {
+  background-color: #039be5;
+  margin-top: 0;
+  height: 20px;
+  padding: 5px;
+  max-width: 400px;
+  margin: 0px auto 0px;
+  border-radius: 3px;
+}
+
+#navbar li {
+  list-style-type: none;
+  margin-right: 20px;
+  float: right;
+}
+
+#navbar li a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#form,
+#updateForm {
+  margin-top: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+
+  body,
+  #playChoice {
+    margin-top: 0;
+    background: #ffffff;
+    box-shadow: none;
   }
-  #playChoice { 
-    background: #ffffff; 
-    max-width: 360px; 
-    margin: 100px auto 16px; 
-    padding: 32px 24px; 
-    border-radius: 3px; 
+
+  body {
+    border-top: 16px solid #ffa100;
   }
-  #playChoice h2 { 
-    color: #ffa100; 
-    font-weight: bold; 
-    font-size: 16px; 
-    margin: 0 0 8px; 
-  }
-  #playChoice { 
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
-  }
-  #playField, #lost {
-    position: absolute;
-    top: 20vh;
-    left: 40vw;
-  }
-  #resultField {
-    position: absolute;
-    top: 35vh;
-    left: 40vw;
-  }
-  #challenge, #guessedLetters {
-    font-size: 22px;
-  }
-  #challenge p, #guessedLetters p {
-    position: relative;
-    font-size: 24px;
-    margin-left: 12px;
-  }
-  #letter {
-    width:25px;
-  }
-  @media (max-width: 600px) {
-    body, #playChoice { 
-      margin-top: 0; 
-      background: #ffffff; 
-      box-shadow: none; 
-    }
-    body { 
-      border-top: 16px solid #ffa100; 
-    }
-  }
+}
