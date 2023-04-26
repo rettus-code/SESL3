@@ -25,12 +25,24 @@
 
   </head>
   <body>
+    <div id = "hero">
+      <h1>Enjoy playing Hangbot</h1>
+      <h3>Don't worry you can't hurt robots by hanging them</h3>
+    </div>
+    <div id = "logging">
+      <form id = "userInfo">
+        <label for = "email" id = "login">Enter Your Email To Begin</label>
+        <input type = "email" name ="email" id = "email" placeholder = "example@hangbot.com">
+        <button type = "submit" id = "loginButton">Login</button>
+        <button type = "reset" id = "logout" style = "display:none" >Logout</button>
+      </form>
+    </div>
     <div id="playChoice">
       <h2 id = "word">Lets play HangBot</h2>
-      <button type = "click" id = "pcPlay">Play vs PC</button>
-      <button type = "click" id = "userPlay" >Accept player challenge</button>
+      <button type = "click" id = "pcPlay" disabled>Play vs PC</button>
+      <button type = "click" id = "userPlay" disabled>Accept player challenge</button>
     </div>
-    <div id = "playField">
+    <div id = "playField"  style = "display:block">
       <h6 id = "challenge"></h6>
       <form id = "guessForm" style = "display:none">
         <label for = "letter">Guess a letter</label>
@@ -45,14 +57,6 @@
       
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-      // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
-      // import { getFirestore } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
-      // import { collection, getDocs, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
-      // import { query, orderBy, limit, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
-      
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-      
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
       const firebaseConfig = {
@@ -67,11 +71,16 @@
       };
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
+      
+      // module functions
       import { pcPlay } from "/scripts/index.js"
       import { guessForm } from "/scripts/index.js"
+      import { userInfo } from "/scripts/auth.js"
       document.getElementById("pcPlay").addEventListener("click", pcPlay);
       document.getElementById("guessForm").addEventListener("submit", guessForm);
+      document.getElementById("userInfo").addEventListener("submit",userInfo);
     </script>
     <script type = "module" src = "scripts/index.js"></script>
+    <script type = "module" src = "scripts/auth.js"></script>
   </body>
 </html>
