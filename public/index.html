@@ -47,14 +47,20 @@
       #playChoice { 
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
       }
-      #playField {
+      #playField, #lost {
         position: absolute;
+        top: 20vh;
         left: 40vw;
       }
-      #challenge {
+      #resultField {
+        position: absolute;
+        top: 35vh;
+        left: 40vw;
+      }
+      #challenge, #guessedLetters {
         font-size: 22px;
       }
-      #challenge p {
+      #challenge p, #guessedLetters p {
         position: relative;
         font-size: 24px;
         margin-left: 12px;
@@ -84,11 +90,15 @@
       <h6 id = "challenge"></h6>
       <form id = "guessForm" style = "display:none">
         <label for = "letter">Guess a letter</label>
-        <input type = "text" name = "letter" id = "letter">
+        <input type = "text" name = "letter" id = "letter" autocomplete="off">
         <button type = "submit" id = "letterButton">Submit your guess</button>
       </form>
     </div>
-    
+    <h1 id = "lost" style="display:none">You Lost</h1>
+    <div id = "resultField" style = "display:none">
+      <h6 id = "guessedLetters" >Letters you've guessed</h6>
+    </div>
+      
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
       // import { getAuth } from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
@@ -114,7 +124,9 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       import { pcPlay } from "/scripts/index.js"
+      import { guessForm } from "/scripts/index.js"
       document.getElementById("pcPlay").addEventListener("click", pcPlay);
+      document.getElementById("guessForm").addEventListener("submit", guessForm);
     </script>
     <script type = "module" src = "scripts/index.js"></script>
   </body>
