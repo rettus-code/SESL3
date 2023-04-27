@@ -38,7 +38,7 @@ function challengeDisplay(){
   guesses = [];
   let chall = document.getElementById("challenge");
   removeAllChildNodes(chall);
-  chall.innerText = "Your word to solve";
+  chall.innerHTML = "Your word to solve<br></br>";
   for(let i = 0; i < curWord.length; i++){
     let li = document.createElement("p");
     li.setAttribute("id", "list" + i);
