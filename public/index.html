@@ -32,15 +32,22 @@
     <div id = "logging">
       <form id = "userInfo">
         <label for = "email" id = "login">Enter Your Email To Begin</label>
-        <input type = "email" name ="email" id = "email" placeholder = "example@hangbot.com">
+        <input type = "email" name ="email" id = "email" placeholder = "example@hangbot.com" required>
         <button type = "submit" id = "loginButton">Login</button>
-        <button type = "reset" id = "logout" style = "display:none" >Logout</button>
+        <button type = "click" id = "logout" style = "display:none" >Logout</button>
       </form>
     </div>
     <div id="playChoice">
       <h2 id = "word">Lets play HangBot</h2>
       <button type = "click" id = "pcPlay" disabled>Play vs PC</button>
-      <button type = "click" id = "userPlay" disabled>Accept player challenge</button>
+      <button type = "click" id = "pVP" disabled>Accept player challenge</button>
+    </div>
+    <div id = "challengeChoice" style = "display: none;">
+      <form id = "choiceForm">
+        <label for = "challengeSel">Choose Your Challenger</label>
+        <select name = "challengeSel" id = "challengeSel"></select>
+      </form>
+
     </div>
     <div id = "playField"  style = "display:block">
       <h6 id = "challenge"></h6>
@@ -54,7 +61,28 @@
     <div id = "resultField" style = "display:none">
       <h6 id = "guessedLetters" >Letters you've guessed</h6>
     </div>
-      
+    <div id = "imgContainer">
+      <img src = "images/stand.png" id = "stand" width="400px">
+      <img src = "images/robot.jpg" id = "robot" width = "200">
+      <div id = "wrong1"></div>
+      <div id = "wrong2"></div>
+      <div id = "wrong3"></div>
+      <div id = "wrong4"></div>
+      <div id = "wrong5"></div>
+      <div id = "wrong6"></div>
+    </div>
+    <div id = "leaders">
+      <h1 id = "leadList">The players ordered by wins</h1>
+    </div>
+    <div id = "issueChallenge" style = "display: none;">
+      <form id = "challengeForm">
+        <label for = "challengeEmail">Email of user you wish to challenge</label><br>
+        <input type = "email" name = "challengeEmail" id = "challengeEmail" placeholder = "example@hangbot.com" required><br>
+        <label for = "playerWord">Select a valid word for the player to guess</label><br>
+        <input type="text" name = "playerWord" id = "playerWord" placeholder="Word" required><br>
+        <button type = "submit">Submit</button>
+      </form>
+    </div>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
       // Your web app's Firebase configuration
@@ -73,12 +101,21 @@
       const app = initializeApp(firebaseConfig);
       
       // module functions
+      import { challengeSelect } from "/scripts/index.js"
+      import { pVP } from "/scripts/index.js"
       import { pcPlay } from "/scripts/index.js"
       import { guessForm } from "/scripts/index.js"
       import { userInfo } from "/scripts/auth.js"
+      import { challengeForm } from "/scripts/auth.js"
+      document.getElementById("choiceForm").addEventListener("change", challengeSelect);
+      document.getElementById("pVP").addEventListener("click", pVP);
       document.getElementById("pcPlay").addEventListener("click", pcPlay);
       document.getElementById("guessForm").addEventListener("submit", guessForm);
       document.getElementById("userInfo").addEventListener("submit",userInfo);
+      document.getElementById("challengeForm").addEventListener("submit", challengeForm);
+      document.getElementById("logout").addEventListener("click", ()=>{
+        window.location.reload(true);
+      });
     </script>
     <script type = "module" src = "scripts/index.js"></script>
     <script type = "module" src = "scripts/auth.js"></script>

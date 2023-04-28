@@ -19,19 +19,53 @@ const functions = getFunctions();
 // const db = getFirestore(app);
 const word = httpsCallable(functions, 'words');
 let curWord = [];
-
-import { update } from "./auth.js";
-export function pcPlay(){
-  word().then((result) => {
-    curWord = result.data.split("");
-    console.log(curWord);
-    challengeDisplay();
-  })
-}
+let playerChallenge = false;
+let index = 0;
 let wrongCount = 0;//tracks the current words wrong guess count
 let guesses = [];/*Maintains all guessed letters any repeats
 are automatically scored as incorrect.*/
 let correctCount = 0;
+import { player } from "./auth.js";
+import { update } from "./auth.js";
+import { buildBoard} from "./auth.js";
+export function pcPlay(){
+  playerChallenge = false;
+  resetGame();
+  buildBoard();
+  word().then((result) => {
+    curWord = result.data.split("");
+    challengeDisplay();
+  })
+}
+export function pVP(){
+  playerChallenge = true;
+  resetGame();
+  buildBoard();
+  if(player.challenges.length < 1){
+    alert("You have no current challenges")
+    return
+  }
+  selectBuild();
+  document.getElementById("challengeChoice").style.display = "block"
+}
+function selectBuild(){
+  let form = document.getElementById("challengeSel");
+  removeAllChildNodes(form);
+  form.innerText = "Choose Your Challenger";
+  for(let i = 0; i < player.challenges.length; i++){
+    let s = document.createElement("option");
+    s.value =  i;
+    s.text = player.challenges[i].challenger;
+    form.add(s);
+  }
+}
+export function challengeSelect(){
+  let form = document.getElementById("challengeSel");
+  index = form.value;
+  curWord = player.challenges[index].word.split("");
+  document.getElementById("challengeChoice").style.display = "none"
+  challengeDisplay();
+}
 function challengeDisplay(){
   wrongCount = 0;
   correctCount = 0;
@@ -49,7 +83,7 @@ function challengeDisplay(){
   document.getElementById("guessForm").style.display = "block"
   document.getElementById("resultField").style.display = "block"
 }
-function removeAllChildNodes(parent) {
+export function removeAllChildNodes(parent) {
   while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
   }
@@ -60,7 +94,6 @@ export function guessForm(e){
   let temp = data["letter"].value;
   if(validation(temp)){
     temp = temp.toLowerCase();
-    console.log("valid");
   } else {
     data.reset()
     return;
@@ -98,7 +131,7 @@ function validation(char){
   return true;
 }
 function botUpdate(){
-  console.log(wrongCount);
+  document.getElementById("wrong" + wrongCount).style.backgroundColor = "transparent"
   if(wrongCount > 5){
     update("l");
     document.getElementById("guessForm").style.display = "none";
@@ -133,9 +166,24 @@ function charMatch(char){
   return match;
 }
 function win(){
+  if(playerChallenge){
+    player.challenges.splice(index, 1);
+    index = 0;
+  }
   update("w");
   document.getElementById("guessForm").style.display = "none";
   document.getElementById("lost").innerText = "You Won!!"
   document.getElementById("lost").style.display = "block";
   document.getElementById("resultField").style.display = "none"
+}
+function resetGame(){
+  for(let i = 1; i <= 6; i++){
+    document.getElementById("wrong" + i).style.backgroundColor = "#ffffff"
+  }
+  document.getElementById("lost").style.display = "none"
+  
+  guesses = [];
+  wrongCount = 0;
+  correctCount = 0;
+  guessedLetters();
 }
