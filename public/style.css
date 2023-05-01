@@ -1,12 +1,13 @@
 body { 
-    background: #ECEFF1; 
+    background: #ffffff; 
     color: rgba(0,0,0,0.87); 
     font-family: Roboto, Helvetica, Arial, sans-serif; 
     margin: 0; 
     padding: 0; 
   }
   #hero, #logging {
-    width: 460px;text-align: center;
+    width: 460px;
+    text-align: center;
     position: absolute;
     left: calc(50vw - 230px);
   }
@@ -15,16 +16,26 @@ body {
   }
   #logging {
     top: 150px;
+    background-color: #039be5;
+    width: 500px;
+    height: 25px;
+    padding-top: 5px;
+    border-radius: 3px;
   }
-
+  #logout {
+    float:right;
+    width:80px;
+  }
   #playChoice { 
     position: absolute;
     top: 150px;
-    left: calc(50vw - 180px);
+    left: calc(50vw - 227px);
     background: #ffffff; 
-    width: 360px; 
+    max-width: 500px; 
+    min-width: 452px;
     margin: 100px auto 16px; 
-    padding: 32px 24px; 
+    padding: 24px; 
+    text-align: center;
     border-radius: 3px; 
     z-index: 5;
   }
@@ -34,23 +45,41 @@ body {
     font-size: 16px; 
     margin: 0 0 8px; 
   }
-  #playChoice { 
+  #playChoice, #logging, #issueChallenge, #challengeChoice { 
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
   }
-  #playField, #lost {
+  #playField, #lost, #issueChallenge {
     position: absolute;
     top: 360px;
-    width:400px;
-    left: calc(50vw - 200px);
+    width:500px;
+    height:fit-content;
+    left: calc(50vw - 227px);
+    justify-content: center;
   }
   #resultField {
     position: absolute;
-    top: 520px;
+    top: 560px;
     width:400px;
     left: calc(50vw - 200px);
   }
+  #challengeChoice {
+    position: absolute;
+    top: 360px;
+    left: calc(50vw - 227px);
+    width:500px;
+    text-align: center;
+    height:100px;
+    z-index: 20;
+  }
+  #guessForm {
+    position: relative;
+    margin-top: 80px;
+    margin-left:110px;
+  }
   #challenge, #guessedLetters {
     font-size: 22px;
+    height:50px;
+    text-align: center;
   }
   #challenge p, #guessedLetters p {
     position: relative;
@@ -60,11 +89,102 @@ body {
   #letter {
     width:25px;
   }
+  #imgContainer {
+    position: absolute;
+    top:50px;
+    left: 75px;
+  }
+  #stand {
+    position: relative;
+    z-index: 4;
+  }
+  #robot {
+    position: relative;
+    top: -144px;
+    left: -190px;
+    z-index: 1;
+  }
+  #wrong1 {
+    position: relative;
+    background-color: #ffffff;
+    width: 100px;
+    height: 70px;
+    top: -374px;
+    left: 240px;
+    z-index: 2;
+  }
+  #wrong2 {
+    position: relative;
+    background-color: #ffffff;
+    width: 100px;
+    height: 82px;
+    top: -376px;
+    left: 260px;
+    z-index: 2;
+  }
+  #wrong3 {
+    position: relative;
+    background-color: #ffffff;
+    width:100px;
+    height: 80px;
+    top: -454px;
+    left: 165px;
+    z-index: 2;
+  }
+  #wrong4 {
+    position: relative;
+    background-color: #ffffff;
+    width:100px;
+    height: 70px;
+    top: -554px;
+    left: 352px;
+    z-index: 2;
+  }
+  #wrong5 {
+    position: relative;
+    background-color: #ffffff;
+    width:100px;
+    height: 70px;
+    top: -527px;
+    left: 210px;
+    z-index: 2;
+  }
+  #wrong6 {
+    position: relative;
+    background-color: #ffffff;
+    width:100px;
+    height: 70px;
+    top: -597px;
+    left: 310px;
+    z-index: 2;
+  }
+  #leaders {
+    position: absolute;
+    right: 150px;
+  }
+  #leadList {
+    font-size: medium;
+  }
+  #leadList p {
+    font-size: small;
+  }
+  #issueChallenge {
+    position: absolute;
+    top: 680px;
+    width:500px;
+    height:fit-content;
+    left: calc(50vw - 227px);
+    text-align: center;
+  }
   @media (max-width: 600px) {
     body, #playChoice { 
       margin-top: 0; 
       background: #ffffff; 
       box-shadow: none; 
+    }
+    #imgContainer {
+      top:400px;
+      left: 0px;
     }
     body { 
       border-top: 16px solid #ffa100; 
